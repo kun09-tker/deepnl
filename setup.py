@@ -17,20 +17,20 @@ extensions = [
     Extension('deepnl.words',
               sources=["deepnl/words.pyx", "deepnl/WordsTrainer.cpp"],
               include_dirs=[np.get_include(),
-                            "/usr/include/eigen3", "deepnl"],
+                            "/usr/include/eigen3"],
               language="c++",
               extra_compile_args=["-fopenmp"]),
     Extension('deepnl.hpca',
               sources=["deepnl/hpca.pyx", "deepnl/HPCA_impl.cpp"],
               include_dirs=[np.get_include(),
-                            "/usr/include/eigen3", "deepnl"],
+                            "/usr/include/eigen3"],
               language="c++",
               extra_compile_args=["-std=c++11"],
               extra_link_args=["-fopenmp"]),
     Extension('deepnl.*',
               sources=['deepnl/*.pyx'],
               include_dirs=[np.get_include(),
-                            "/usr/include/eigen3", "deepnl"],
+                            "/usr/include/eigen3"],
               language="c++",
               extra_compile_args=["-fopenmp"]),
 ]
@@ -62,7 +62,7 @@ setup(
         nthreads=1),
     scripts = glob.glob("bin/*.py"),
 
-    py_modules=["deepnl/word_dictionary"],
+    # py_modules=["deepnl/word_dictionary"],
 
     classifiers = [
         "Development Status :: 3 - Alpha",
