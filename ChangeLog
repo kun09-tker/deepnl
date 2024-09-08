@@ -1,0 +1,642 @@
+2016-06-26  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/corpus.py: moved from __future__ import print_function to top.
+	* deepnl/embeddings.py: idem.
+
+2016-04-23  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/words.pyx (LmWorker.__init__): fixed.
+
+	* deepnl/*.py: use print function for Python 3 compatibility.
+
+2016-03-07  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/words.pyx (train.train_worker): get left_context from
+	self_prepadding.
+
+2016-03-05  Giuseppe Attardi  <attardi@R730-gpu>
+
+	* deepnl/reader.py (TweetReader.__init__): specify fileds for text and polarity.
+	(TweetReader.create_vocabulary): fixed indentation.
+	(TweetReader.read): added optional polarity dictionary.
+
+2016-02-03  Antonio Valerio Miceli Barone < github.com/Avmb >
+
+	* deepnl/HPCA.cpp: renamed to deepnl/HPCA_impl.cpp in order to avoid a
+        conflict with deepnl/hpca.cpp in case-insensitive file systems.
+        * deepnl/hpca.pyx: updated to reflect the above change.
+        * setup.py: idem.
+
+2016-01-06  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainer.pyx (train): initialize AdaGrad accumulators by adaEps.
+
+	* deepnl/extractors.pyx (Extractor.adaGradInit): initialize with adaEps.
+
+	* bin/dl-conv.py (main): added option --eps.
+
+2015-12-24  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkconv.pyx (backpropagate): use MultiMarginCriterion
+	also for computing gradients.
+
+2015-12-18  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/utils.py (create_feature_tables): removed.
+
+	* bin/dl-sentiwords.py (create_trainer): consider parameter --window
+	as left/right context, consistently with word2vec.
+	* bin/dl-conv.py (main): idem.
+	* bin/dl-ner.py (main): idem.
+	* bin/dl-pos.py (main): idem.
+	* bin/dl-words.py (main): idem.
+
+2015-11-18  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-conv.py (main): added options text_field and label_field
+	to select fields from tsv input files.
+
+	* deepnl/network.pyx (ConvolutionalNetwork.backpropagate):
+	in np.where condition > -1.
+
+	* deepnl/networkconv.pyx (ConvolutionalNetwork.backpropagate): use
+	MultiMarginCriterion
+	in np.where condition > -1.
+
+	* deepnl/classifier.pyx (Classifier.predict: use argmax(vars.output)
+
+2015-11-04  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pyx (Network.backpropagate): grads.hiddenx_bias
+	instead of vars.hidden_bias.
+
+2015-10-14  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-sentiwords.py (main): pass minOccurr and vocab_size to reader.create_vocabulary.
+
+2015-10-08  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkseq.pyx (SeqParameters.initialize): put back high to 1.0.
+
+2015-10-07  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainerconv.pyx (ConvTrainer): holds a Classifier, which
+	saves to file after training.
+
+	* deepnl/utils.py (import_class): added.
+
+2015-10-05  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/sentiwords.pyx (SentimentTrainer._train_pair_s): compute
+	also grads.input.
+
+2015-10-04  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/tagger.pyx (Tagger.tag_sequence): return list of tags.
+
+	* deepnl/extractors.pyx (save): save also fields and use them in load.
+
+	* bin/dl-ner.py (main): pass whole tokens to tagger.
+
+	* deepnl/networkseq.pyx (_viterbi): preallocate prev_score_and_trans.
+
+	* deepnl/word_dictionary.py (WordDictionary.__setitem__): do not
+	insert normalized word if already present.
+
+2015-10-02  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkseq.pyx (SeqParameters.initialize): high = 0.01
+
+2015-10-01  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pyx (Variables.addSquare): moved here from Gradients.
+
+	* deepnl/trainer.pyx (Trainer): turned adaEps, adaRo etc. into
+	Trainer attributes.
+
+2015-09-29  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pxd: use int32 instead of int64 which is weird
+	default for Python and Numpy.
+
+2015-09-27  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (Converter): fully reworked: see below.
+
+	* deepnl/extractors.pyx (Converter.convert): It passes to each
+	extractor a sentence, which could be either a list of words or a list of
+	tokens. It then calls Extractor.extract() passing either the token
+	field index to use or -1 for the whole token.
+
+	* deepnl/extractors.pyx (Extractor.extract): the default behavior
+	is to perform a lookup in the extractor dictionary of the proper
+	word.
+	The method is specialized in derived classes.
+	Extractors are never called on padding tokens, which are dealt instead
+	by methods get_padding_left(), get_padding_right()
+
+	* deepnl/word_dictionary.py (WordDictionary.__init__): default is 'senna'.
+	(WordDictionary.check): eliminated.
+	(WordDictionary): turned left_padding, right_padding and rare into
+	indices, rather than strings. Strings are only needed at initialization.
+
+	* bin/dl-ner.py (main): variant None in POS extractor (no normalization).
+
+2015-09-26  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (GazetteerExtractor.extract): no clobbering of words.
+
+2015-09-25  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-ner.py (main): fixed AttributeExtractor initialization.
+
+	* deepnl/extractors.pxd (class AttributeExtractor): added.
+
+	* deepnl/trainerconv.pyx (_train_epoch): fixed nn.variables() size.
+
+	* deepnl/reader.py (ClassifyReader): label_field -2, text_field -1.
+
+2015-09-24  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-ner.py (main): added option --pos to use POS tag features.
+
+2015-09-22  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/tagger.pyx (_tag_sequence): lookup whole sentence at once.
+
+	* deepnl/networkseq.pyx (SequenceNetwork._calculate_gradients_sll): added parameter skipErr.
+
+	* deepnl/network.pyx (skipErr): set to 0.01 (was 1e-4). This might impact speed.
+
+	* deepnl/extractors.pyx (normalize): added.
+
+2015-09-21  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/word_dictionary.py (WordDictionary.__setitem__): update
+	words as well.
+
+	* deepnl/extractors.pyx (save_vectors): use self.dict.words.
+
+	* deepnl/word_dictionary.py (WordDictionary.__init__): words are
+	normalized before insertion.
+
+2015-09-19  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (merge): avoid getdefault().
+
+	* deepnl/word_dictionary.py (WordDictionary.__setitem__): added.
+	(WordDictionary._normalize): added.
+
+	* bin/dl-ner.py (main): use %(default)s in help string.
+	* bin/dl-pos.py (main): idem.
+
+2015-09-18  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/word_dictionary.py (WordDictionary.size): added.
+
+2015-08-24  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainer.pyx (Trainer.rain): stop after max_no_progress
+	epochs without progress.
+
+	* deepnl/network.pyx: use backward activation function hardath_back.
+
+	* deepnl/math.pyx (hardtanh_back): backward function for hardtanh
+	activation layer, that produces gradients of input by multiplying
+	by gradiets of output.
+
+	* deepnl/tagger.pyx: cpdef tag_sequence.
+
+	* bin/dl-words.py: commented out profiling.
+
+	* bin/dl-pos.py (main): updated similarly to dl-ner.py.
+
+	* deepnl/reader.py (PosReader.__init__): handle form and tag fields.
+
+	* deepnl/sentiwords.pyx (train): modified implementation of
+	AdaGrad.
+
+	* deepnl/extractors.pyx (Converter.upgrade): perform properly
+	AdaGrad, using a table of accumulated squares in each extractor.
+	Added method clearAdagrad() to initialize them, which should be
+	called at the beginning of training.
+
+2015-08-23  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-ner.py (prefix):  default to 5.
+
+2015-08-21  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainer.pyx (_train_epoch): add padding to sentence.
+
+	* deepnl/tagger.pyx (_tag_sequence): sentence is padded.
+
+	* bin/dl-ner.py (main): added options --eps and --ro.
+
+	* deepnl/network.pyx (__init__): Initialization protocol for
+	class networks now requires that Parameters object be passed, for
+	avoiding double initialization in derived classes.
+
+	* bin/dl-ner.py (main): default for vocab-size is 0.
+
+	* deepnl/networkseq.pyx: fixed self.p.transitions.
+
+2015-08-20  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainer.pyx (save_vectors): pass variant.
+
+	* deepnl/network.pyx: use multiclass hinge loss.
+
+	* deepnl/networkconv.pyx: fixed hinge calculation.
+
+	* deepnl/math.pyx: revert to np.ndarray since memoryviews don't
+	have max operator.
+
+	* bin/dl-ner.py (main): SuffixExtractor.create() is just
+	SuffixExtractor().
+
+	* deepnl/sentiwords.pyx (train): invoke epoch_report().
+
+	* deepnl/extractors.pyx (save_vocabulary): restored.
+
+2015-08-16  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pxd ((l1_decay, l2_decay, momentum, adaRo,
+	adaEps): training parameters declared as globals.
+
+	* deepnl/trainer.pyx (Trainer.__init__): grouped optional parameters in
+	single options dictionary.
+	Network must be passed as argument, hence scripts dl-ner.py,
+	dl-pos.py etc. have been modified to create it and then pass it,
+	as well as to group options into dictionary.
+
+	* bin/dl-ner.py (main): added argument vocab-size.
+
+	* bin/dl-conv.py (main): grouped parser arguments.
+
+	* bin/dl-ner.py (main): grouped parser arguments.
+
+2015-08-15  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pxd (Network): moved error to class Trainer.
+
+2015-08-14  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/math.pyx: started moving to using Memoryviews.
+
+	* deepnl/words.pyx (LmTrainer.update): call  nn.p.update().
+
+	* deepnl/trainer.pyx (Trainer.update): use AdaGrad.
+
+	* deepnl/network.pyx (Parameters.copy): added.
+
+2015-08-13  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkconv.pyx: revised.
+
+	* deepnl/network.pyx (Network.run): renamed to forward.
+	* deepnl/networkconv.pyx (ConvolutionalNetwork.run): renamed to forward.
+
+	* deepnl/networkconv.pyx: use multiclass hinge function.
+
+2015-08-10  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkconv.pyx (ConvParameters): similar to Parameters.
+
+	* deepnl/networkconv.pyx (ConvolutionaleNetwor): use ConvParameters field.
+
+	* deepnl/networkseq.pyx (SeqParameters): added.
+
+	* deepnl/networkseq.pyx (SeqquenceNetwor): use SeqParameters field.
+
+	* deepnl/network.pyx (Parameters): Parameters turned into a field
+	of Network.
+	Added methods save, load and update.
+
+	* deepnl/network.pyx (Network.update): moved to Parameters.
+
+	* bin/dl-sentiwords.py: save vocabulary also whe using word2vec.
+
+2015-08-09  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/reader.py (TweetReader.read): drop empty tweets.
+
+2015-08-06  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkconv.pyx: completed.
+
+2015-07-22  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (GazetteerExtractor): use Trie for ngrams.
+
+	* deepnl/utils.py (Trie): for storing and searching ngrams.
+
+2015-07-20  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (extract): use trie of ngrams for gazetteers.
+
+2015-07-17  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-ner.py (main): use GazetteerExtractor.build()
+
+	* deepnl/extractors.pyx (build): build gazetteers with ngrams from
+	sentences.
+
+2015-07-16  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (build): optionally put suffixes in lower case.
+
+2015-07-16  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-ner.py (main): create affixes and gazetteer if not supplied.
+	Create additional vocabulary from corpus.
+	Added parameter --vocab-size to specify size of created vocabulary.
+	Insert libdir to the front of sys.path, to give it precedence over
+	installed library.
+
+	* deepnl/extractors.pyx (AffixExtractorwrite): added.
+
+2015-07-15  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/reader.py (TaggerReader.__init__): added formField, tagField
+
+	* deepnl/ner_tagger.py (ToIOBES.__iter__): added tagField
+
+2015-07-14  giuseppe attardi  <attardi@di.unipi.it>
+
+	* deepnl/embeddings.py (Word2Vec.save): added.
+
+2015-07-14  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (create): preserve insertion order.
+
+	* bin/dl-ner.py (main): extend provided vocabulary from words in
+	corpus.
+	(main): create the gazetteers from the training corpus.
+
+2015-06-29  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (save_vocabulary): preserve order by ID.
+
+	* deepnl/sentiwords.pyx (_train_pair_s): fixed computing
+	grads.output_weights.
+
+2015-06-28  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/sentiwords.pyx (_update): fixed AdaGrad step.
+
+2015-06-25  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/sentiwords.pyx (itertrie): yield unigram
+
+2015-06-24  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (__init__): load vectors also when vocab
+	is supplied.
+
+2015-06-17  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (merge): fixed iteration on vocab.
+
+	* bin/dl-sentiwords.py: made train a positional argument
+
+2015-05-17  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/reader.py (TweetReader.read): fixed bug causing skipping
+	positive tweets.
+	(TweetReader.read): keep also neutral tweets.
+
+2015-05-16  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/words.pyx (LmWorker._extract_window): moved to LmTrainer
+	for sharing with SentimentTrainer.
+
+	* deepnl/trainer.pyx (Trainer.update): moved here from Tagger.
+
+	* deepnl/network.pyx (Network): modularized dealing with variables
+	and gradients. Each network type provides methods variables() and
+	gradients() to allocate the variables or gradients it uses.
+
+	* deepnl/math.pyx (hardtanh, hardtanhd): use nditer.
+
+	* deepnl/networkseq.pyx (_calculate_gradients_sll): dropped case
+	for null self.transitions.
+	avoid allocations by using out parameter or [:] assignment.
+
+	* deepnl/networkseq.pyx (update): dropped case for null
+	self.transitions.
+
+2015-05-14  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/embeddings.py (Word2Vec.read_vectors): renamed load().
+
+	* deepnl/extractors.pyx (__init__): use Word2Vec.
+
+	* deepnl/embeddings.py: dropped Gensim class since Gensim dropped
+	support for its own file format.
+	(Word2Vect): renamed to Word2Vec.
+
+2015-05-10  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/corpus.py (TsvReader): added.
+
+	* deepnl/math.pyx (hardtanh, hardtanhd): use np.nditer.
+	(tanhe): use slicing to avoid copying.
+
+2015-04-28  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-words.py (main): missing default to param words.
+	(main): converter.add().
+
+2015-04-24  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-ner.py (main): pass tokens to SuffixExtractor()
+
+	* deepnl/word_dictionary.py (WordDictionary.__init__): check for None,
+	since index might be 0.
+
+2015-04-23  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/embeddings.py (Gensim.read_vectors): do not create weights for
+	special symbols here.
+
+	* deepnl/word_dictionary.py (WordDictionary.__init__): padding for
+	word2vect.
+
+	* deepnl/extractors.pyx (AffixExtractor.__init__): accept wordlist as
+	argument.
+
+2015-04-24  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (Embeddings.__init__): add vectors for
+	special symbols.
+
+2015-04-23  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/word_dictionary.py (WordDictionary.__contains__):
+	lowercase only for SENNA.
+	(WordDictionary.__getitem__): check is not None since idx might be
+	None.
+
+	* bin/dl-pos.py (main): pass word list to SuffixExtractor.
+
+2015-04-02  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkseq.pyx: softmax by column requires axis=0.
+
+2015-03-29  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainer.pyx (_train_epoch): invoke Converter.update().
+
+	* deepnl/extractors.pyx (Converter.update): added.
+
+2015-03-26  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.pyx (create): added lowcase option.
+
+2015-01-29  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/trainer.pyx (MovingAverage): added.
+
+2015-01-27  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/dl-sentiwords.py: added.
+
+2015-01-08  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/reader.py (TextReader.read): removed any logger commands:
+	logging should be done by callers.
+
+2015-01-04  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/extractors.py (Extractor): feature are now extracted by Extractor
+	objects, each one dealing with one kind of features, e.g. embeddings,
+	pos, caps, etc.
+	Each one is responsible for saving and loading its own data to a
+	single model file.
+
+2015-01-03  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/srl/srl_reader.py (read_conll): split fields at \t.
+	(SRLReader._codify_sentences): use SentencexsConverter instead of
+	TokenConverter.
+
+	* deepnl/attributes.py (TokenConverter): renamed SentenceConverter since
+	it needs to operate at the sentence level, e.g. the NER converter
+	needs to lookup ngrams in the gazetteers.
+
+	* deepnl/reader.py (Reader.create_converter): return converter rather
+	than assign it to self.
+
+	* deepnl/taggers.py (load_data): pass  parameter path instead of using
+	property sys.paths.
+
+	* deepnl/network.pyx: method load_features() does the job previously done
+	in load_data() in taggers.py.
+	(load_from_file): renamed to load_weights.
+
+	* deepnl/corpus.py: reader/writer for various corpus formats.
+
+2014-12-30  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networklm.pyx: split half_window into left_context and
+	right_context since they might not be necessarily the same.
+
+	* deepnl/srl/srl_reader.py: moved here relevant parts from nlpnet/read_data.py
+	* nlpnet/read_data.py: removed.
+
+2014-12-26  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/word_dictionary.py (WordDictionary): make senna the default variant
+	(WordDictionary): just use a single padding for both left and right
+
+2014-12-23  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* metadata.py (Metadata.save_to_file): use file names from config.py
+
+	* config.py: added sslm portion.
+	Use consistent naming convenion of prefix task nae rather than postfix.
+
+	* deepnl/reader.py (TextReader.codify_sentences): convert_sentences -> convert
+
+	* deepnl/network.pyx (hardtanhe): derivative of hardtanh in terms of its
+	output.
+
+	* deepnl/networklm.pyx (_train_pair): use hardtanhe instead of hardtanhd.
+
+2014-12-22  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networklm.pyx (_new_random_pool): generate a simple list, not a
+	list of singletons.
+
+2014-12-20  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* nlpnet/networkSent.pyx: network for sentiment-specific word
+	embeddings.
+
+2014-05-06  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/utils.py (generate_feature_vectors): use random.uniform.
+
+	* deepnl/network.pyx (_viterbi): fixed bug.
+
+2014-05-05  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pyx (_calculate_gradients_sll): use softmax(delta[-1]).
+
+	* deepnl/ner/ner_reader.py (noGazetteer): for cases where there is on
+	entry for a class in the gazetteer dictionary.
+
+2014-05-03  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pyx (softmax): added softmax function, for computing
+	softmax directly, without resorting to logsumexp.
+
+2014-05-02  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/network.pyx (_calculate_delta): avoid transpose by using
+            logadd = logsumexp(delta[token - 1][:,np.newaxis] + transitions, 0)
+	instead of
+            logadd = logsumexp(delta[token - 1] + transitions_T, 1)
+
+2014-04-23  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* deepnl/networkconv.pyx (_convolution_lookup): use lookup().
+
+	* deepnl/networklm.pyx (_train_pair): use lookup().
+
+	* deepnl/network.pyx (lookup): added, so that run() method can get the
+	input directly and we need not to store the input in the network.
+
+	* deepnl/networkconv.pyx (_tag_sentence): use logsumexp to avoid numeric
+	instability.
+
+	* deepnl/networklm.pyx: class LanguageModel derived from Network so that
+	it inherits attributes and methods, including run().
+
+	* deepnl/arguments.py (get_args): set default to 0.01 for --lf and -lt.
+	(get_args): made option --gold required.
+
+2014-04-22  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/nlpnet-train.py (saver): use random.seed() if you want to
+	ensure replicability.
+
+2014-04-19  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/nlpnet-train.py (create_network): moved initialization of
+	transitions to Network.create_new().
+
+2014-04-17  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/nlpnet-train.py (create_network): initialize transition
+	randomly rather than 0.
+
+2014-03-10  Giuseppe Attardi  <attardi@di.unipi.it>
+
+	* bin/nlpnet-tag.py (_print_tagged_ner): handle ner output.
+
+	* bin/nlpnet-train.py (create_reader): added case for ner.
+	(create_network): similarly
+	(train): first argument is text_reader, not reader
+
