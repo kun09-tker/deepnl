@@ -178,7 +178,7 @@ class TweetReader(Reader):
         super(TweetReader, self).__init__()
         self.text_field = text_field
         self.label_field = label_field
-	self.ngrams = ngrams
+        self.ngrams = ngrams
         self.variant = variant
         self.sentences = []
         self.polarities = []

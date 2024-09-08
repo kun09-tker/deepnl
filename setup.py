@@ -62,7 +62,14 @@ setup(
         nthreads=1),
     scripts = glob.glob("bin/*.py"),
 
-    # py_modules=["deepnl/word_dictionary"],
+    py_modules=["deepnl/word_dictionary",
+                "deepnl/embeddings",
+                "deepnl/corpus",
+                "deepnl/utils",
+                "deepnl/reader",
+                "deepnl/ner_tagger",
+                "deepnl/pos_tagger"
+                ],
 
     classifiers = [
         "Development Status :: 3 - Alpha",
