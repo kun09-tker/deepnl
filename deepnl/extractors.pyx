@@ -23,7 +23,7 @@ import sys                      # modules
 
 # local
 from .word_dictionary import WordDictionary as WD
-import .embeddings
+from . import embeddings
 from .utils import Trie, strip_accents
 
 # ----------------------------------------------------------------------
