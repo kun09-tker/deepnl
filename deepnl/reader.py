@@ -14,8 +14,8 @@ from collections import Counter
 import gzip
 
 # local
-from corpus import *
-from embeddings import Plain
+from .corpus import *
+from .embeddings import Plain
 
 class Reader(object):
     """

@@ -9,10 +9,10 @@ import sys
 from __future__ import print_function
 
 # local
-from network import Network
-from tagger import Tagger
-from reader import PosReader
-from corpus import *
+from .network import Network
+from .tagger import Tagger
+from .reader import PosReader
+from .corpus import *
 
 # ----------------------------------------------------------------------
 

@@ -10,7 +10,7 @@ import numpy as np
 import logging
 
 # local
-from word_dictionary import WordDictionary
+from .word_dictionary import WordDictionary
 
 # ----------------------------------------------------------------------
 
