@@ -15,7 +15,7 @@ import pickle
 from deepnl.network cimport *
 from deepnl.extractors import Converter
 from deepnl.extractors cimport Converter
-from utils import import_class
+from .utils import import_class
 
 # ----------------------------------------------------------------------
 
