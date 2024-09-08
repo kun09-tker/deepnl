@@ -62,6 +62,8 @@ setup(
         nthreads=1),
     scripts = glob.glob("bin/*.py"),
 
+    py_modules=["deepnl/word_dictionary"],
+
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Environment :: Console",

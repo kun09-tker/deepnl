@@ -22,7 +22,7 @@ from numpy import int32 as INT
 import sys                      # modules
 
 # local
-from deepnl.word_dictionary import WordDictionary as WD
+from word_dictionary import WordDictionary as WD
 import embeddings
 from utils import Trie, strip_accents
 
