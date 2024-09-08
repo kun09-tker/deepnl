@@ -147,7 +147,7 @@ cdef class Converter(object):
             out = np.empty(self.size() * len(sentence))
         cdef int_t start = 0, end
         for token in sentence:
-            for feature, extractor in izip(token, self.extractors):
+            for feature, extractor in zip(token, self.extractors):
                 end = start + extractor.size()
                 np.copyto(out[start:end], extractor[feature])
                 start = end
@@ -171,7 +171,7 @@ cdef class Converter(object):
         """
         cdef int_t start = 0, end
         for token in sequence:
-            for feature, extractor in izip(token, self.extractors):
+            for feature, extractor in zip(token, self.extractors):
                 end = start + extractor.size()
                 if extractor.adaGrads is None:
                     extractor.table[feature] += learning_rate * grads[start:end]
@@ -203,7 +203,7 @@ cdef class Converter(object):
         # FIXME: this will recognize only classes defined in this file
         #m = __import__("extractors")
         m = sys.modules['deepnl.extractors']
-        for c,f in izip(class_names, self.fields):
+        for c,f in zip(class_names, self.fields):
             cls = getattr(m, c)
             self.add(cls.__new__(cls), f)
         for extractor in self.extractors:

@@ -8,7 +8,6 @@ from __future__ import print_function
 import os
 import numpy as np
 import logging
-from itertools import izip
 
 # local
 from word_dictionary import WordDictionary
@@ -93,7 +92,7 @@ class Word2Embeddings(object):
         """
         Load the feature matrix used by word2embeddings.
         """
-        import cPickle as pickle
+        import pickle
     
         with open(filename, 'rb') as f:
             model = pickle.load(f)
@@ -129,7 +128,7 @@ class Word2Vec(object):
         """
         with open(filename, 'wb') as f:
             print(len(words), vectors.shape[1], file=f)
-            for word, vector in izip(words, vectors):
+            for word, vector in zip(words, vectors):
                 print(word.encode('UTF-8'), ' '.join('%f' % w for w in vector), file=f)
 
 # ----------------------------------------------------------------------

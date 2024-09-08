@@ -13,7 +13,7 @@ Options:
 from __future__ import print_function
 import sys
 from optparse import OptionParser
-import cPickle as pickle
+import pickle
 from operator import itemgetter
 import re
 import numpy as np

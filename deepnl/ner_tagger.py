@@ -6,7 +6,6 @@ NER tagger exploiting a deep neural network.
 
 # standard
 import sys
-from itertools import izip
 
 # local
 from tagger import Tagger
@@ -59,7 +58,7 @@ class NerTagger(Tagger):
     
     def tag(self, sent, tagField=-1):
         tags = self.toIOB(super(NerTagger, self).tag(sent))
-        for tok,tag in izip(sent, tags):
+        for tok,tag in zip(sent, tags):
             tok[tagField] = tag
         return sent
 

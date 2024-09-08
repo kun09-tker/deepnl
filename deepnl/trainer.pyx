@@ -191,7 +191,7 @@ cdef class Trainer(object):
         nn = self.nn
         vars = nn.variables()   # allocate variables
         cdef int_t i = 0
-        for sent, label in izip(sentences, labels):
+        for sent, label in zip(sentences, labels):
             # add padding
             sent = np.concatenate((self.pre_padding, sent, self.post_padding))
             self.converter.lookup(sent, vars.input)
@@ -338,7 +338,7 @@ cdef class TaggerTrainer(Trainer):
         cdef float_t error
         cdef int_t i = 0, slen
         cdef np.ndarray[int_t,ndim=2] sent
-        for sent, sent_tags in izip(sentences, tags):
+        for sent, sent_tags in zip(sentences, tags):
             slen = len(sent)    # sequence length
             # add padding
             sent = np.concatenate((self.pre_padding, sent, self.post_padding))
@@ -394,7 +394,7 @@ cdef class TaggerTrainer(Trainer):
             sent = np.concatenate((self.pre_padding, sent, self.post_padding))
             scores = self.tagger._tag_sequence(sent)
             answer = self.tagger.nn._viterbi(scores)
-            for pred_tag, gold_tag in izip(answer, gold_tags):
+            for pred_tag, gold_tag in zip(answer, gold_tags):
                 if pred_tag == gold_tag:
                     hits += 1
                 tokens += 1

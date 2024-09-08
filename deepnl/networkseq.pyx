@@ -193,7 +193,7 @@ cdef class SequenceNetwork(Network):
         cdef float_t trans, correct_path_score = 0
         cdef int_t tag, prev_tag = self.output_size # transitions[:-1] is  initial
         cdef np.ndarray[float_t] nth_scores
-        for tag, nth_scores in izip(tags, scores):
+        for tag, nth_scores in zip(tags, scores):
             correct_path_score += self.p.transitions[prev_tag, tag] + nth_scores[tag]
             prev_tag = tag
         
@@ -293,7 +293,7 @@ cdef class SequenceNetwork(Network):
         # correct path and its gradient
         correct_path_score = 0
         token = 0
-        for tag, net_scores in izip(tags, scores):
+        for tag, net_scores in zip(tags, scores):
             grads.output[token][tag] += 1 # negative gradient
             token += 1
             correct_path_score += net_scores[tag]

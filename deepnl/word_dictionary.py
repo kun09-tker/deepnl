@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collections import Counter, OrderedDict
-import cPickle as pickle
+import pickle
 import re
 from numpy import int32 as INT
 
