@@ -58,9 +58,9 @@ def clean_text(text, correct=True):
     
     # replaces different kinds of quotation marks with "
     # take care not to remove apostrophes
-    text = re.sub(ur"(?u)(^|\W)[‘’′`']", r'\1"', text)
-    text = re.sub(ur"(?u)[‘’`′'](\W|$)", r'"\1', text)
-    text = re.sub(ur'(?u)[«»“”]', '"', text)
+    text = re.sub(r"(?u)(^|\W)[‘’′`']", r'\1"', text)
+    text = re.sub(r"(?u)[‘’`′'](\W|$)", r'"\1', text)
+    text = re.sub(r'(?u)[«»“”]', '"', text)
     
     if correct:
         # tries to fix mistyped tokens (common in Wikipedia-pt) as ,, '' ..
