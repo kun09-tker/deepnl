@@ -42,7 +42,7 @@ from numpy import int32 as INT
 from deepnl.trainer cimport Trainer
 from deepnl.extractors cimport Iterable
 from deepnl.word_dictionary import WordDictionary as WD
-from . import utils
+from .utils import grouper
 
 cdef class RandomPool(object):
     """
@@ -310,7 +310,7 @@ cdef class LmTrainer(Trainer):
 
         # fill the job queue
         for epoch in xrange(epochs):
-            for job in utils.grouper(sentences, chunk_size):
+            for job in grouper(sentences, chunk_size):
                 jobs.put(job, True) # block if full
         #jobs.put(None)          # DEBUG
         for _ in workers:
