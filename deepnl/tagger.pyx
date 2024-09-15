@@ -14,7 +14,7 @@ import sys                      # DEBUG
 
 # local
 from deepnl.network cimport *
-from . import network
+from deepnl.network import Variables
 from deepnl.networkseq import SequenceNetwork
 from numpy import int32 as INT
 
@@ -88,7 +88,7 @@ cdef class Tagger(object):
         
         # container for network variables
         #vars = nn.variables()
-        vars = network.Variables() # empty fields, filled below
+        vars = Variables() # empty fields, filled below
 
         if train:
             # we must keep the whole history
