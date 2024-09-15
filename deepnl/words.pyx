@@ -18,7 +18,7 @@ import threading
 # profiler
 #import yappi
 
-from Queue import Queue
+from queue import Queue
 # DEBUG
 # from collections import deque
 # class Queue(deque):
