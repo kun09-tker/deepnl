@@ -14,7 +14,7 @@ import sys                      # DEBUG
 
 # local
 from deepnl.network cimport *
-import network
+from . cimport network
 from deepnl.networkseq import SequenceNetwork
 from numpy import int32 as INT
 
