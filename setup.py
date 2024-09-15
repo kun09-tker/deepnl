@@ -69,7 +69,7 @@ setup(
                 "deepnl/reader",
                 "deepnl/ner_tagger",
                 "deepnl/pos_tagger",
-                # "deepnl/network"
+                "deepnl/network"
                 ],
 
     classifiers = [
