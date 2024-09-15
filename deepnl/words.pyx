@@ -42,7 +42,7 @@ from numpy import int32 as INT
 from deepnl.trainer cimport Trainer
 from deepnl.extractors cimport Iterable
 from deepnl.word_dictionary import WordDictionary as WD
-import utils
+from . import utils
 
 cdef class RandomPool(object):
     """
