@@ -18,19 +18,19 @@ import threading
 # profiler
 #import yappi
 
-# from queue import Queue
+from queue import Queue
 # DEBUG
 # from collections import deque
-class Queue(deque):
-     def __init__(self, maxsize=0):
-         super(Queue, self).__init__()
-     def put(self, item, wait=False):
-         super(Queue, self).append(item)
-     def get(self):
-         if len(self):
-             return super(Queue, self).popleft()
-         else:
-             return None
+# class Queue(deque):
+#     def __init__(self, maxsize=0):
+#         super(Queue, self).__init__()
+#     def put(self, item, wait=False):
+#         super(Queue, self).append(item)
+#     def get(self):
+#         if len(self):
+#             return super(Queue, self).popleft()
+#         else:
+#             return None
 
 # for method decorations
 cimport cython

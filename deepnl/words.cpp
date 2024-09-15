@@ -22587,19 +22587,19 @@ if (!__Pyx_RefNanny) {
  * # DEBUG
  * # from collections import deque
  */
-  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_s_Queue);
-  __Pyx_GIVEREF(__pyx_n_s_Queue);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Queue)) __PYX_ERR(0, 21, __pyx_L1_error);
-  __pyx_t_3 = __Pyx_Import(__pyx_n_s_Queue, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Queue); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_Queue, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  // __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  // __Pyx_GOTREF(__pyx_t_2);
+  // __Pyx_INCREF(__pyx_n_s_Queue);
+  // __Pyx_GIVEREF(__pyx_n_s_Queue);
+  // if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_Queue)) __PYX_ERR(0, 21, __pyx_L1_error);
+  // __pyx_t_3 = __Pyx_Import(__pyx_n_s_Queue, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 21, __pyx_L1_error)
+  // __Pyx_GOTREF(__pyx_t_3);
+  // __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  // __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_Queue); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  // __Pyx_GOTREF(__pyx_t_2);
+  // if (PyDict_SetItem(__pyx_d, __pyx_n_s_Queue, __pyx_t_2) < 0) __PYX_ERR(0, 21, __pyx_L1_error)
+  // __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  // __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "deepnl/words.pyx":41
  * from deepnl.math cimport *
