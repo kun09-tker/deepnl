@@ -22650,10 +22650,10 @@ if (!__Pyx_RefNanny) {
  * 
  * cdef class RandomPool(object):
  */
-  __pyx_t_3 = __Pyx_ImportDottedModule(__pyx_n_s_utils, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_utils, __pyx_t_3) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  // __pyx_t_3 = __Pyx_ImportDottedModule(__pyx_n_s_utils, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  // __Pyx_GOTREF(__pyx_t_3);
+  // if (PyDict_SetItem(__pyx_d, __pyx_n_s_utils, __pyx_t_3) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  // __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "deepnl/words.pyx":58
  *         self._new_pool()
