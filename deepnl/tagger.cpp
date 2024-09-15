@@ -11194,10 +11194,10 @@ if (!__Pyx_RefNanny) {
  * from deepnl.networkseq import SequenceNetwork
  * from numpy import int32 as INT
  */
-  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_network, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_network, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  // __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_network, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  // __Pyx_GOTREF(__pyx_t_2);
+  // if (PyDict_SetItem(__pyx_d, __pyx_n_s_network, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  // __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "deepnl/tagger.pyx":18
  * from deepnl.network cimport *
