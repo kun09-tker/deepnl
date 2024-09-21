@@ -304,7 +304,8 @@ cdef class Embeddings(Extractor):
             if vectors and os.path.exists(vectors):
                 self.table = self.load_vectors(vectors)
             else:
-                print(f"extractor Embeddings len(self.dict) {len(self.dict)}")
+                print(f"extractor Embeddings type of self.dict {type(self.dict)}")
+                print(f"extractor Embeddings self.dict {self.dict}")
                 self.table = embeddings.generate_vectors(len(self.dict), size)
         elif variant == 'word2vec':
             # load both vocab and vectors from single file
