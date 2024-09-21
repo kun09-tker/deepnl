@@ -277,7 +277,7 @@ cdef class SentimentTrainer(LmTrainer):
 
         grads = SentGradients(self.nn.input_size, self.nn.hidden_size, self.nn.output_size)
         
-        print("============INFO REPORT:Do convert -> Start train =========="),
+        print("============INFO REPORT:Done convert -> Start train =========="),
         for epoch in xrange(epochs):
             self.error = 0.0
             self.epoch_items = 0
