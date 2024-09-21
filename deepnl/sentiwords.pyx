@@ -255,6 +255,7 @@ cdef class SentimentTrainer(LmTrainer):
         # generate 1000 random indices at a time to save time
         # (generating 1000 integers at once takes about ten times the time for a single one)
         # FIXME: nonsense to create random features besides ID
+        print("============INFO REPORT: Start convert sentence=========="),
         feature_tables = [e.table for e in self.converter.extractors]
         self.random_pool = RandomPool([x.shape[0] for x in feature_tables])
         self.total_pairs = 0
