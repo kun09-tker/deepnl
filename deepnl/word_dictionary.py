@@ -77,6 +77,7 @@ class WordDictionary(dict):
             # Keep the order and eliminate duplicates
             #words = list(OrderedDict.fromkeys(self.normalize(w) for w in wordlist))
             words = list(OrderedDict.fromkeys(wordlist))
+            print(f"Debug word_dictionary create {words}")
             
         # trim to the maximum size
         if size is None:
@@ -107,6 +108,8 @@ class WordDictionary(dict):
             self.padding_left = INT(len(self))
             self.padding_right = self.padding_left
             self.rare = INT(self.padding_left + 1)
+        
+        return self.words
     
     def size(self):
         """

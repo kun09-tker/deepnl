@@ -22,9 +22,9 @@ from numpy import int32 as INT
 import sys                      # modules
 
 # local
-from word_dictionary import WordDictionary as WD
-import embeddings
-from utils import Trie, strip_accents
+from .word_dictionary import WordDictionary as WD
+from . import embeddings
+from .utils import Trie, strip_accents
 
 # ----------------------------------------------------------------------
 
