@@ -34,6 +34,7 @@ class WordDictionary(dict):
         :param variant: either 'polyglot', 'word2vec', or 'senna' conventions,
             i.e. keep case, use different padding tokens.
         """
+        print(f"Enter WD")
         self.variant = variant
         if variant:
             self.variant = variant.lower()

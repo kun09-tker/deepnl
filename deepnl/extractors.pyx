@@ -297,8 +297,9 @@ cdef class Embeddings(Extractor):
         :param variant: style of embeddings (senna, polyglot, word2vect)
         """
         super(Embeddings, self).__init__()
-
+        print("Enter start extractor Embeddings")
         if vocab:
+            print("Enter create extractor Embeddings")
             self.dict = <dict>WD(None, wordlist=vocab, variant=variant)
             if vectors and os.path.exists(vectors):
                 self.table = self.load_vectors(vectors)
