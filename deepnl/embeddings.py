@@ -34,7 +34,7 @@ class Plain(object):
         Return a list of words.
         """
         words = []
-        with open(filename, 'rb') as f:
+        with open(filename, 'r') as f:
             for line in f:
                 word = unicode(line.strip(), 'utf-8')
                 if word:
@@ -46,10 +46,9 @@ class Plain(object):
         """
         Write a vocabulary to a file containing one word per line.
         """
-        with open(filename, 'wb') as f:
+        with open(filename, 'w', encoding='utf-8') as f:
             for word in vocab:
-                f.write(word.encode('utf-8'))
-                # print(word.encode('utf-8'), file=f)
+                print(word, file=f)
 
     @classmethod
     def write_vectors(cls, filename, matrix):
@@ -57,9 +56,9 @@ class Plain(object):
         Write embedding vectors to a plain text file with one vector per 
         line, values separated by whitespace.
         """
-        with open(filename, 'wb') as file:
+        with open(filename, 'w') as file:
             for row in matrix:
-                print(b' '.join(["%f" % x for x in row]), file=file)
+                print(' '.join(["%f" % x for x in row]), file=file)
 
 # ----------------------------------------------------------------------
 
