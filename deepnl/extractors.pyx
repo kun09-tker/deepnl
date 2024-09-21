@@ -259,7 +259,6 @@ cdef class Extractor(object):
         if field >= 0:
             return [self.dict[token[field]] for token in tokens]
         else:
-            print(f"Exactors tokens: {tokens}")
             return [self.dict[token] if token in self.dict else -1 for token in tokens]
 
     cpdef int_t size(self):
