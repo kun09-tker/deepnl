@@ -263,10 +263,10 @@ cdef class SentimentTrainer(LmTrainer):
         cdef int_t save_period = 1000 * 1000 # FIXME
 
         cdef float_t all_cases = float(sum([len(sen) for sen in sentences]) * epochs * self.ngram_size)
-
+        print("============INFO REPORT:Done convert -> Start train =========="),
         cdef int_t epoch, num, pos
         cdef float_t remaining
-
+        print("============INFO REPORT:Done convert -> Start train =========="),
         cdef int_t left_context = len(self.pre_padding)
         cdef int_t right_context = len(self.post_padding)
         cdef int_t window_size = left_context + 1 + right_context
@@ -274,7 +274,7 @@ cdef class SentimentTrainer(LmTrainer):
         cdef np.ndarray window = np.empty((window_size, 1), dtype=INT)
         cdef np.ndarray token, neg_token
         cdef int_t size = 1
-
+        print("============INFO REPORT:Done convert -> Start train =========="),
         grads = SentGradients(self.nn.input_size, self.nn.hidden_size, self.nn.output_size)
         
         print("============INFO REPORT:Done convert -> Start train =========="),
