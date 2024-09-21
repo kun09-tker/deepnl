@@ -300,7 +300,7 @@ cdef class Embeddings(Extractor):
         print("Enter start extractor Embeddings")
         if vocab:
             print("Enter create extractor Embeddings")
-            self.dict = <dict>WD(None, wordlist=vocab, variant=variant)
+            self.dict = <dict>WD(None, wordlist=vocab, variant=variant).words
             if vectors and os.path.exists(vectors):
                 self.table = self.load_vectors(vectors)
             else:
@@ -308,14 +308,14 @@ cdef class Embeddings(Extractor):
         elif variant == 'word2vec':
             # load both vocab and vectors from single file
             self.table, wordlist = embeddings.Word2Vec.load(vectors)
-            self.dict = <dict>WD(None, wordlist=wordlist, variant=variant)
+            self.dict = <dict>WD(None, wordlist=wordlist, variant=variant).words
             # add vectors for special symbols
             extra = len(self.dict) - len(self.table)
             if extra > 0:
                 logging.info('Adding %d special symbols' % extra)
                 self.table = np.concatenate((self.table, embeddings.generate_vectors(extra, self.table.shape[1])))
         elif vocab_file:
-            self.dict = <dict>WD(None, wordlist=self.load_vocabulary(vocab_file), variant=variant)
+            self.dict = <dict>WD(None, wordlist=self.load_vocabulary(vocab_file), variant=variant).words
             if vectors and os.path.exists(vectors):
                 self.table = self.load_vectors(vectors)
             else:

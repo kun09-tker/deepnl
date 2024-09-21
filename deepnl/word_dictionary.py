@@ -109,8 +109,6 @@ class WordDictionary(dict):
             self.padding_left = INT(len(self))
             self.padding_right = self.padding_left
             self.rare = INT(self.padding_left + 1)
-        
-        return self.words
     
     def size(self):
         """
