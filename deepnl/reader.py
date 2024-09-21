@@ -227,7 +227,7 @@ class TweetReader(Reader):
         # @see Mikolov et al. 2013. Efficient Estimation of Word Representations in Vector Space. In Proceedings of Workshop at ICLR, 2013
         # unigrams
         unigramCount = Counter(token for tweet in tweets for token in tweet)
-        ngrams = [u for u,c in unigramCount.iteritems() if c >= min_occurrences]
+        ngrams = [u for u,c in unigramCount.items() if c >= min_occurrences]
         # bigrams
         bigramCount = Counter()
         trigramCount = Counter()
@@ -240,12 +240,12 @@ class TweetReader(Reader):
             if len(tweet) > 1 and unigramCount[tweet[-2]] >= min_occurrences and unigramCount[tweet[-1]] >= min_occurrences:
                 bigramCount.update([(tweet[-2], tweet[-1])])
         bigrams = []
-        for b, c in bigramCount.iteritems():
+        for b, c in bigramCount.items():
             if (float(c) - TweetReader.delta) / (unigramCount[b[0]] * unigramCount[b[1]]) > threshold:
                 ngrams.append(b[0] + '_' + b[1])
                 bigrams.append(b)
         trigrams = []
-        for b, c in trigramCount.iteritems():
+        for b, c in trigramCount.items():
             if (float(c) - TweetReader.delta) / (unigramCount[b[0]] * unigramCount[b[1]]) > threshold/2 \
                 and (float(c) - TweetReader.delta) / (unigramCount[b[1]] * unigramCount[b[2]]) > threshold/2:
                 ngrams.append(b[0] + '_' + b[1] + '_' + b[2])

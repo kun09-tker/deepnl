@@ -552,7 +552,7 @@ cdef class AffixExtractor(Extractor):
         with open(filename, 'wb') as f:
             # order by ID
             affixes = [''] * len(self.dict)
-            for a, i in self.dict.iteritems():
+            for a, i in self.dict.items():
                 affixes[i - self.specials] = a
             for i in range(self.specials, len(self.dict)):
                 print(affixes[i].encode('utf-8'), file=f)
