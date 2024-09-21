@@ -239,6 +239,7 @@ cdef class SentimentTrainer(LmTrainer):
 
     def train(self, Iterable sentences, list polarities, trie,
               int_t epochs, int_t report_freq):
+        print("============INFO REPORT: Start convert sentence=========="),
         """
         Trains the sentiment language model on the given sentences.
         :param sentences: an iterable on a list of token features for each sentence
