@@ -78,7 +78,6 @@ class WordDictionary(dict):
             # Keep the order and eliminate duplicates
             #words = list(OrderedDict.fromkeys(self.normalize(w) for w in wordlist))
             words = list(OrderedDict.fromkeys(wordlist))
-            print(f"Debug word_dictionary create {words}")
             
         # trim to the maximum size
         if size is None:
