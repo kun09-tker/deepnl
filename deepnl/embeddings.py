@@ -48,7 +48,8 @@ class Plain(object):
         """
         with open(filename, 'wb') as f:
             for word in vocab:
-                print(word.encode('utf-8'), file=f)
+                f.write(word.encode('utf-8'))
+                # print(word.encode('utf-8'), file=f)
 
     @classmethod
     def write_vectors(cls, filename, matrix):
@@ -58,7 +59,7 @@ class Plain(object):
         """
         with open(filename, 'wb') as file:
             for row in matrix:
-                print(' '.join(["%f" % x for x in row]), file=file)
+                print(b' '.join(["%f" % x for x in row]), file=file)
 
 # ----------------------------------------------------------------------
 
