@@ -114,13 +114,13 @@ cdef class Converter(object):
         :return: the features of the left padding token.
         
         """
-        return INT([e.get_padding_left() for e in self.extractors])
+        return np.array([e.get_padding_left() for e in self.extractors], dtype=INT)
     
     cdef np.ndarray[int_t] get_padding_right(self):
         """
         :return: the features of the right padding token.
         """
-        return INT([e.get_padding_right() for e in self.extractors])
+        return np.array([e.get_padding_right() for e in self.extractors], dtype=INT)
     
     cpdef np.ndarray[int_t,ndim=2] convert(self, list sent):
         """
@@ -128,7 +128,7 @@ cdef class Converter(object):
         :param sent: a list of tokens.
         :return: an array of all extractors' results.
         """
-        return INT(zip(*[(<Extractor>e).extract(sent, field) for e, field in zip(self.extractors, self.fields)]))
+        return np.array(list(zip(*[(<Extractor>e).extract(sent, field) for e, field in zip(self.extractors, self.fields)])), dtype=INT)
         # CHECKME: is this faster?
         # return np.array([extractor.extract(sent) for extractor in self.extractors]).T
 
